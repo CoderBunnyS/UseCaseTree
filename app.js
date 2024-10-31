@@ -10,7 +10,7 @@ const questions = [
       no: "Auth as a Service"
     },
     {
-      text: "Are the users of this system primarily individual consumers or end users?",
+      text: "Are the users of this system primarily individual consumers?",
       yes: 3,
       no: 4
     },
