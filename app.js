@@ -95,8 +95,10 @@ const questions = [
     const question = questions[index];
     const questionList = document.getElementById("question-list");
   
+    // Create a new question block
     const questionBlock = document.createElement("div");
     questionBlock.classList.add("question-block");
+    questionBlock.setAttribute("id", `question-${index}`);
   
     const questionText = document.createElement("p");
     questionText.classList.add("question-text");
@@ -130,9 +132,10 @@ const questions = [
   
     const next = questions[index][answer];
   
-    // Remove any questions displayed after this one to allow updating
+    // Clear all subsequent questions when a new answer is chosen
     clearQuestionsFrom(index + 1);
   
+    // Display the next question or result
     if (typeof next === "string") {
       displayResult(next);
     } else {
@@ -142,9 +145,17 @@ const questions = [
   
   function clearQuestionsFrom(index) {
     const questionList = document.getElementById("question-list");
-    while (questionList.children.length > index) {
-      questionList.removeChild(questionList.lastChild);
+  
+    // Remove each question block starting from the given index
+    let nextQuestion = document.getElementById(`question-${index}`);
+    while (nextQuestion) {
+      questionList.removeChild(nextQuestion);
+      index++;
+      nextQuestion = document.getElementById(`question-${index}`);
     }
+  
+    // Hide the result container if it's visible
+    document.getElementById("result-container").style.display = "none";
   }
   
   function displayResult(useCase) {
@@ -160,7 +171,6 @@ const questions = [
       <p><a href="${useCases[useCase].documentationLink}" target="_blank">Read more in the documentation</a></p>
     `;
   }
-  
   
   // Start with the first question
   document.addEventListener("DOMContentLoaded", () => displayQuestion(0));

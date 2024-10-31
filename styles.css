@@ -47,7 +47,7 @@ body {
   }
   
   button {
-    background-color: #007bff; /* Blue from FusionAuth theme */
+    background-color: rgb(83, 40, 116); 
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -58,12 +58,14 @@ body {
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #007bb2; /* Darker blue for hover effect */
   }
   
   button.selected {
     background-color: #ffb74d; /* FusionAuth orange when selected */
   }
+  
+
   
   #result-container {
     margin-top: 20px;
