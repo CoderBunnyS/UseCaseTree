@@ -1,126 +1,144 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light text */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-  }
-  
-  .header-image {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .container {
-    background-color: #1f1f1f; /* Slightly lighter dark for the container */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 800px; /* Match the header image width */
-    margin-top: 20px;
-    text-align: center; /* Center content inside container */
-  }
-  
-  h1 {
-    color: #ffb74d; /* FusionAuth's orange accent color */
-  }
-  
-  .question-block {
-    margin-top: 15px;
-    text-align: center; /* Center each question block */
-  }
-  
-  .question-text {
-    font-weight: bold;
-    color: #e0e0e0;
-    margin-bottom: 10px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  button {
-    background-color: rgb(83, 40, 116); 
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #007bb2; /* Darker blue for hover effect */
-  }
-  
-  button.selected {
-    background-color: #ffb74d; /* FusionAuth orange when selected */
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
 
-  
-  #result-container {
-    margin-top: 20px;
-    color: #e0e0e0;
-    text-align: left;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+.header-image {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container {
+  background-color: #1f1f1f; /* Slightly lighter dark for the container */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 90%; /* Use a percentage width for responsiveness */
+  max-width: 800px; /* Limit the max width for larger screens */
+  margin-top: 5rem; /* Space from the top */
+  text-align: center; /* Center content inside container */
+  position: relative; /* Allows absolute positioning of reset button */
+}
+
+.reset-button {
+  position: absolute; /* Position relative to the container */
+  top: 2rem;
+  right: 0%;
+  background-color: #ffb74d; /* FusionAuth orange */
+  color: #121212; /* Dark text for contrast */
+  border: none;
+  padding: 0.8rem 1.2rem; /* Use responsive padding */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem; /* Ensure text size is scalable */
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 10; /* Keep above other content */
+}
+
+.reset-button:hover {
+  background-color: #ffa233; /* Slightly lighter orange */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+h1 {
+  color: #ffb74d; /* FusionAuth's orange accent color */
+  margin-top: 10%;
+}
+
+.question-block {
+  margin-top: 15px;
+  text-align: center; /* Center each question block */
+}
+
+.question-text {
+  font-weight: bold;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  background-color: rgb(83, 40, 116);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 5%;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #007bb2; /* Darker blue for hover effect */
+}
+
+button.selected {
+  background-color: #ffb74d; /* FusionAuth orange when selected */
+}
+
+#result-container {
+  margin-top: 20px;
+  color: #e0e0e0;
+  text-align: left;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+#result-container h2 {
+  color: #ffb74d; /* FusionAuth's orange */
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#result-container p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Style for links */
+a {
+  color: #ffb74d; /* FusionAuth's orange */
+  text-decoration: underline; /* Ensure links are underlined to show they are clickable */
+  font-weight: bold; /* Optional: Make links stand out more */
+}
+
+a:hover {
+  color: #ffa233; /* Slightly lighter orange for hover effect */
+  text-decoration: underline; /* Keep underline on hover */
+}
+
+
+/* Media Query for Screens 815px and Smaller */
+@media (max-width: 815px) {
+  .container {
+    margin-top: 2rem; /* Adjust spacing for smaller screens */
   }
-  
-  #result-container h2 {
-    color: #ffb74d; /* FusionAuth's orange */
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+
+  .reset-button {
+    position: static; /* Remove absolute positioning */
+    margin: 1rem auto; /* Center the button below the header */
   }
-  
-  #result-container p {
-    font-size: 1rem;
-    line-height: 1.5;
+
+  .header-image {
+    width: 80%; /* Scale down the header image for smaller screens */
+    margin-bottom: 1rem; /* Add space between header and reset button */
   }
-  
-  #result-container h3 {
-    font-size: 1.2rem;
-    margin-top: 15px;
-    color: #ffb74d; /* FusionAuth's orange */
+
+  .container {
+    text-align: center;
   }
-  
-  #result-container ul {
-    list-style-type: none; /* Remove bullets */
-    padding: 0;
-  }
-  
-  #result-container ul li {
-    padding-left: 20px;
-    position: relative;
-  }
-  
-  #result-container ul li::before {
-    content: "•";
-    color: #ffb74d; /* FusionAuth orange */
-    position: absolute;
-    left: 0;
-    font-size: 1.2rem;
-    top: 0;
-  }
-  
-  #result-container a {
-    color: #ffb74d; /* FusionAuth's orange */
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  #result-container a:hover {
-    color: #ffa233; /* Slightly lighter shade on hover */
-    text-decoration: underline;
-  }
-  
+}
