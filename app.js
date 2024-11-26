@@ -45,7 +45,7 @@ const questions = [
 ];
 
 const useCases = {
-  "App Suite": {
+  "Application Suite": {
     description: `
       Seamlessly transition users across applications in a suite with unified login and Single Sign-On (SSO) capabilities.
       <ul>
@@ -156,6 +156,8 @@ const useCases = {
 };
 
 
+
+
 let answers = [];
 
 /**
@@ -187,49 +189,78 @@ function displayQuestion(index) {
   questionList.appendChild(questionBlock);
 }
 
+
 /**
  * Handle when an answer is selected.
  */
 function handleAnswer(index, answer) {
-  // If the answer is the same as before, do nothing
-  if (answers[index] === answer) return;
+  console.log(`Answer selected for question ${index}: ${answer}`); // Debugging
 
   // Store the updated answer
   answers[index] = answer;
 
-  // Clear all subsequent questions
+  // Clear all subsequent questions and results
   clearQuestionsFrom(index + 1);
+  console.log(`Answer changed. Clearing questions from index: ${index + 1}`);
+
+  // Debugging: Log the answers state after clearing
+  console.log("Current answers after clearing:", answers);
 
   // Get the next step based on the selected answer
   const nextStep = questions[index].options[answer];
 
-  // If it's a number, display the next question
+  // Ensure any remaining results are hidden
+  document.getElementById("result-container").style.display = "none";
+
   if (typeof nextStep === "number") {
+    console.log(`Displaying next question: ${nextStep}`); // Debugging
+    // Display the next question dynamically
     displayQuestion(nextStep);
   } else {
-    // If it's a result, display the result
+    console.log(`Displaying result: ${nextStep}`); // Debugging
+    // Otherwise, show the result
     displayResult(nextStep);
   }
 }
+
+
 
 /**
  * Clear all questions starting from the given index.
  */
 function clearQuestionsFrom(index) {
+  console.log(`Clearing questions from index: ${index}`); // Debugging
   const questionList = document.getElementById("question-list");
 
-  // Remove all questions starting from the given index
-  let nextQuestion = document.getElementById(`question-${index}`);
-  while (nextQuestion) {
-    questionList.removeChild(nextQuestion);
-    delete answers[index];
-    index++;
-    nextQuestion = document.getElementById(`question-${index}`);
-  }
+  // Select all question blocks with an index >= the given one
+  const questionsToClear = Array.from(
+    questionList.querySelectorAll(`[id^="question-"]`)
+  ).filter(el => {
+    const questionIndex = parseInt(el.id.split("-")[1], 10);
+    return questionIndex >= index;
+  });
 
-  // Hide the result container if present
+  // Remove each matched question
+  questionsToClear.forEach(el => {
+    console.log(`Removing question: ${el.id}`); // Debugging
+    el.remove();
+  });
+
+  // Clear the answers array entirely from the current index onwards
+  answers = answers.slice(0, index);
+
+  // Ensure no stale DOM elements remain
+  console.log(
+    "Remaining question elements in DOM after clearing:",
+    questionList.innerHTML
+  );
+
+  // Hide the result container
   document.getElementById("result-container").style.display = "none";
 }
+
+
+
 
 /**
  * Display the result for the selected use case.
@@ -262,7 +293,7 @@ function resetFlow() {
   displayQuestion(0);
 }
 
-// Initialize the first question on page load
+// Initialize the first question and reset button on page load
 document.addEventListener("DOMContentLoaded", () => {
   displayQuestion(0);
 });
